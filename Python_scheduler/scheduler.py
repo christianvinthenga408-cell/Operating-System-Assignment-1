@@ -63,7 +63,7 @@ def sjf(process_list):
             ready.sort(key=lambda x: x.burst)
 
             current = ready[0]
-            print(f"current.pid, runs from {time} to {time + current.burst}")
+            print(f"{current.pid}, runs from {time} to {time + current.burst}")
 
             time += current.burst
             completed.append(current)
@@ -94,7 +94,7 @@ def priority_scheduling(process_list):
             ready.sort(key=lambda x: x.priority)
 
             current = ready[0]
-            print(f"{current.pid} runs from {time} to {time + current.burst}, Priority = {current.priority}")
+            print(f"{current.pid} runs from {time} to {time + current.burst}, With Priority of {current.priority}")
 
             time += current.burst
             completed.append(current)
