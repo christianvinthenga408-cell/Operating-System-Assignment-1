@@ -1,6 +1,3 @@
-# ----------------------------------
-# PROCESS CLASS
-# ----------------------------------
 class Process:
     def __init__(self, pid, arrival, burst, priority):
         self.pid = pid
@@ -133,7 +130,7 @@ def priority_with_ageing(process_list):
                 if waiting[p.pid] % 3 == 0:
                     if p.priority > 1:
                         p.priority -= 1
-                        print(f" {p.pid} aged -> New Priority = {p.priority}")
+                        print(f"{p.pid} Get a New Priority of {p.priority}")
 
             ready.sort(key=lambda x: x.priority)
             current = ready[0]
