@@ -5,11 +5,11 @@ import json
 import copy
 
 class Process:
-    def __init__(self, pid, arrival, burst, priority):
+    def __init__(self, pid, arrival, burst, prio):
         self.pid = pid
         self.arrival = arrival
         self.burst = burst
-        self.priority = priority
+        self.priority = prio
         self.remaining = burst
         self.completion = 0
         self.turnaround = 0
@@ -17,45 +17,45 @@ class Process:
         self.response = -1
 
 def load_csv(filename):
-    processes = []
+    process_list = []
 
     with open(filename, "r") as file:
         reader = csv.DictReader(file)
 
         for row in reader:
-            processes.append(Process(int(row["pid"]),int(row["arrival"]),int(row["burst"]),int(row["priority"])))
+            process_list.append(Process(int(row["pid"]),int(row["arrival"]),int(row["burst"]),int(row["priority"])))
 
-    return processes
+    return process_list
 def load_json(filename):
-    processes = []
+    process_list = []
 
     with open(filename, "r") as file:
         data = json.load(file)
 
     for row in data:
-        processes.append(Process(int(row["pid"]),int(row["arrival"]),int(row["burst"]),int(row["priority"])))
+        process_list.append(Process(int(row["pid"]),int(row["arrival"]),int(row["burst"]),int(row["priority"])))
 
-    return processes
+    return process_list
 
 def generate_random(n, seed):
     random.seed(seed)
 
-    processes = []
+    process_list = []
 
     for i in range(n):
         arrival = random.randint(0, 10)
         burst = random.randint(1, 10)
-        priority = random.randint(1, 5)
-        processes.append(Process(i + 1,arrival,burst,priority))
+        prio = random.randint(1, 5)
+        processes.append(Process(i + 1,arrival,burst,prio))
 
-    return processes
+    return process_list
 
-def finalize_metrics(processes):
-    for p in processes:
+def finalize_metrics(process_list):
+    for p in process_list:
         p.turnaround = p.completion - p.arrival
         p.waiting = p.turnaround - p.burst
 
-def print_results(name, processes):
+def print_results(name, process_list):
     print("\n==============================")
     print(name)
     print("==============================")
@@ -67,9 +67,9 @@ def print_results(name, processes):
     total_rt = 0
     total_burst = 0
 
-    finish_time = max(p.completion for p in processes)
+    finish_time = max(p.completion for p in process_list)
 
-    for p in sorted(processes, key=lambda x: x.pid):
+    for p in sorted(process_list, key=lambda x: x.pid):
         print(f"{p.pid:<4}"f"{p.arrival:<5}"f"{p.burst:<7}"f"{p.completion:<6}"f"{p.turnaround:<5}"f"{p.waiting:<4}"f"{p.response:<4}")
 
         total_wt += p.waiting
@@ -77,7 +77,7 @@ def print_results(name, processes):
         total_rt += p.response
         total_burst += p.burst
 
-    n = len(processes)
+    n = len(process_list)
 
     avg_wt = total_wt / n
     avg_tat = total_tat / n
