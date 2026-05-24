@@ -8,7 +8,6 @@ typedef struct {
 } Process;
 void run_process_manager() {
     printf("===== Process Manager =====\n");
-
     Process processes[5] = {
         {1, 0, 5, 3},
         {2, 1, 3, 1},

@@ -6,7 +6,6 @@
 
 int pool_task_queue[MAX_TASKS];
 int pool_task_count = 0;
-
 pthread_t pool_workers[THREAD_POOL_SIZE];
 pthread_mutex_t pool_queue_mutex;
 pthread_cond_t pool_queue_cond;
