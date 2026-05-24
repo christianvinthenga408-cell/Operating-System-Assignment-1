@@ -213,7 +213,7 @@ def round_robin(original, quantum=2):
 
     while True:
 
-        while (index < len(plist) and plist[index].arrival <= time):
+        while index < len(plist) and plist[index].arrival <= time:
             queue.append(plist[index])
             index += 1
 
@@ -236,7 +236,7 @@ def round_robin(original, quantum=2):
         time += run
         p.remaining -= run
 
-        while (index < len(plist) and plist[index].arrival <= time):
+        while index < len(plist) and plist[index].arrival <= time:
             queue.append(plist[index])
             index += 1
 
@@ -358,6 +358,7 @@ def animate_gantt(gantt, title, filename):
         ax.set_xlabel("Time")
 
         ax.grid(True)
+        return ax.patches
 
     anim = FuncAnimation(
         fig,
