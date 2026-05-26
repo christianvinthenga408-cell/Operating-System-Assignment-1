@@ -1,0 +1,16 @@
+*.exe
+*.o
+*.obj
+
+__pycache__/
+*.pyc
+
+venv/
+env/
+.venv/
+
+.idea/
+*.iml
+
+.DS_Store
+Thumbs.db
